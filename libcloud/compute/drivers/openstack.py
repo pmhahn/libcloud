@@ -88,6 +88,7 @@ class OpenStackNodeDriver(NodeDriver, OpenStackDriverMixin):
         'REBUILD': NodeState.PENDING,
         'ACTIVE': NodeState.RUNNING,
         'SUSPENDED': NodeState.SUSPENDED,
+        'PAUSED': NodeState.PAUSED,
         'SHUTOFF': NodeState.STOPPED,
         'DELETED': NodeState.TERMINATED,
         'QUEUE_RESIZE': NodeState.PENDING,
