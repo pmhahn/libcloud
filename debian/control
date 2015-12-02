@@ -6,6 +6,7 @@ Uploaders: Soren Hansen <soren@ubuntu.com>,
            Hans-Christoph Steiner <hans@eds.org>,
            Andrew Starr-Bochicchio <asb@debian.org>
 Build-Depends: debhelper (>= 7.0.50~),
+               dh-python,
                openssh-client,
                python-all (>= 2.6.6-3~),
                python-crypto (>= 2.6),
@@ -15,9 +16,9 @@ Build-Depends: debhelper (>= 7.0.50~),
                python-epydoc,
                python-pydoctor,
                python-backports.ssl-match-hostname,
+               python-unittest2,
                python3-all,
                python3-crypto (>= 2.6),
-               python3-simplejson,
                python3-setuptools,
                python3-mock (>= 0.8.0)
 Standards-Version: 3.9.6
@@ -35,6 +36,7 @@ Depends: ${misc:Depends},
          python-crypto (>= 2.6),
          python-lockfile,
          python-simplejson
+Recommends: ca-certificates
 Description: unified Python interface into the cloud
  libcloud is a pure Python client library for interacting with many of the
  popular cloud server providers using a unified API. It was created to make it
@@ -65,7 +67,7 @@ Architecture: all
 Depends: ${misc:Depends},
          ${python3:Depends},
          python3-crypto (>= 2.6),
-         python3-simplejson
+Recommends: ca-certificates
 Description: unified Python interface into the cloud (Python3 version)
  libcloud is a pure Python client library for interacting with many of the
  popular cloud server providers using a unified API. It was created to make it
