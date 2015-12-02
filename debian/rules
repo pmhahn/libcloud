@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME=libcloud
+
+%:
+	dh $@ --with python2,python3 --buildsystem=pybuild
+
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+override_dh_auto_test:
+	ln -s secrets.py-dist libcloud/test/secrets.py
+	for pyversion in $(shell pyversions -vr); do python$$pyversion setup.py test; done
+	for py3version in $(shell py3versions -vr); do python$$py3version setup.py test; done
+
+override_dh_clean:
+	dh_clean
+	rm -f libcloud/test/secrets.py
+endif
+
+override_dh_auto_install:
+	dh_installchangelogs CHANGES.rst
+	dh_auto_install

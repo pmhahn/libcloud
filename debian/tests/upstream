@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+PYTHON2S=`pyversions -d`
+PYTHON3S=`py3versions -d`
+
+cp libcloud/test/secrets.py-dist libcloud/test/secrets.py
+
+for PY in $PYTHON2S; do
+    $PY setup.py test 2>&1;
+done
+
+for PY in $PYTHON3S; do
+    $PY setup.py test 2>&1;
+done

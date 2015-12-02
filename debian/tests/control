@@ -1,0 +1,3 @@
+Tests: upstream
+Depends: @, python-mock, python3-mock, python-setuptools, python3-setuptools
+

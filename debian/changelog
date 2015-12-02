@@ -1,0 +1,117 @@
+libcloud (0.19.0-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release.
+    - Obsolete debian/patches/dont_req_backports_with_py3.patch
+  * debian/copyright: 2015
+
+ -- Philipp Hahn <hahn@univention.de>  Mon, 30 Nov 2015 16:17:22 +0100
+
+libcloud (0.17.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/patches/dont_req_backports_with_py3.patch:
+   - Don't require the backports.ssl_match_hostname module when
+     running the tests under Python 3 as it is not needed.
+  * debian/control:
+   - Build-depend on python-backports.ssl-match-hostname
+   - Bump Standards-Version to 3.9.6, no changes.
+  * debian/watch: Use pypi.debian.net redirector.
+  * debian/copyright: Update and add myself. 
+
+ -- Andrew Starr-Bochicchio <asb@debian.org>  Sat, 09 May 2015 15:45:37 -0400
+
+libcloud (0.15.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Build Python3 package (Closes: #745962). Thanks to
+    Daniel Lintott for the initial patch!
+  * Correctly install upstream changelog.
+  * Add lintian overrides for privacy-breach-generic as they are
+    being triggered by dummy data used in the testsuite.
+  * Install example files.
+  * Add autopackage tests.
+
+ -- Andrew Starr-Bochicchio <asb@debian.org>  Sun, 06 Jul 2014 21:59:57 -0400
+
+libcloud (0.14.1-1) unstable; urgency=low
+  
+  * new upstream release
+
+ -- Hans-Christoph Steiner <hans@eds.org>  Thu, 17 Apr 2014 11:41:46 -0400
+
+libcloud (0.13.3-1) unstable; urgency=low
+
+  [ Jakub Wilk ]
+  * Add Vcs-* fields.
+
+  [ Julien Cristau ]
+  * New upstream release
+  * Bump X-Python-Version to 2.6+, 2.5 didn't have an ssl module.
+
+  [ Jakub Wilk ]
+  * Use canonical URIs for Vcs-* fields.
+
+  [ Hans-Christoph Steiner ]
+  * Non-maintainer upload (closes: #679881)
+  * Newest upstream release where the tests pass (tests are broken in
+    0.14.0 and 0.14.1).
+  * Bumped Standards-Version to 3.9.5. No changes needed.
+
+ -- Hans-Christoph Steiner <hans@eds.org>  Wed, 16 Apr 2014 22:09:23 -0400
+
+libcloud (0.5.0-1) unstable; urgency=low
+
+  * New upstream release (Closes: #598463)
+  * Make myself Uploader instead of Maintainer and set DPMT as the
+    maintainer.
+  * Adjust debian/watch now that libcloud is a toplevel Apache project.
+  * Remove dependency on zope.interface (dropped upstream).
+  * Convert to debhelper 7 and dh_python2.
+  * Bumped Standards-Version to 3.9.2. No changes needed.
+  * Bump debian/compat to 7.
+  * Drop debian/pycompat.
+  * Use debian/clean instead of overriding dh_auth_clean.
+
+ -- Soren Hansen <soren@ubuntu.com>  Tue, 14 Jun 2011 13:27:50 +0200
+
+libcloud (0.3.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Update debian/copyright to reflect libcloud's inclusion into the
+    Apache incubator programme (copyright reassigned to ASF) and to
+    account for the new OpenNEbula driver being copyrighted differently
+    than the bulk of the project.
+
+ -- Soren Hansen <soren@ubuntu.com>  Tue, 18 May 2010 07:40:17 +0200
+
+libcloud (0.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Update Standards-Version to 3.8.4. No changes needed.
+  * Switch to "3.0 (quilt)" source package format.
+  * Dropped get-orig-source target from debian/rules. Upstream has released
+    tarballs.
+  * Added watch file.
+
+ -- Soren Hansen <soren@ubuntu.com>  Fri, 07 May 2010 10:00:57 +0200
+
+libcloud (0.1.1~git20091201-1) unstable; urgency=low
+
+  * New upstream snapshot.
+  * Add dependencies for test suite to Build-Depends.
+
+ -- Soren Hansen <soren@ubuntu.com>  Wed, 02 Dec 2009 11:32:37 +0100
+
+libcloud (0.1.1~git20091125-1) UNRELEASED; urgency=low
+
+  * New upstream release
+  * Run test suite at build time.
+
+ -- Soren Hansen <soren@ubuntu.com>  Wed, 25 Nov 2009 10:43:15 +0100
+
+libcloud (0.1.1~git20091107-1) unstable; urgency=low
+
+  * Initial upload to Debian. (Closes: #555006)
+
+ -- Soren Hansen <soren@ubuntu.com>  Sat, 07 Nov 2009 22:45:52 +0100

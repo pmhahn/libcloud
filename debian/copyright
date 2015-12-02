@@ -1,0 +1,26 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: apache-libcloud
+Upstream-Contact: dev@libcloud.apache.org
+Source: https://git-wip-us.apache.org/repos/asf/libcloud.git
+
+Files: libcloud/test/compute/test_rimuhosting.py
+Copyright: 2009, RedRata Ltd.
+License: Apache-2.0
+
+Files: libcloud/test/compute/test_opennebula.py
+       libcloud/compute/drivers/opennebula.py
+Copyright: 2002-2009, Distributed Systems Architecture Group, Universidad Complutense de Madrid (dsa-research.org)
+License: Apache-2.0
+
+Files: debian/*
+Copyright: 2009-2010, Soren Hansen <soren@ubuntu.com>
+           2014-2015, Andrew Starr-Bochicchio <asb@debian.org>
+License: Apache-2.0
+
+Files: *
+Copyright: 2009-2015, The Apache Software Foundation.
+License: Apache-2.0
+
+License: Apache-2.0
+ On Debian systems the full text of the Apache License can be found
+ in the `/usr/share/common-licenses/Apache-2.0' file.

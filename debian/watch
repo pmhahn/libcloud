@@ -1,0 +1,3 @@
+version=3
+opts=pgpsigurlmangle=s/$/.asc/ \
+http://pypi.debian.net/apache-libcloud/apache-libcloud-(.*).tar.bz2
