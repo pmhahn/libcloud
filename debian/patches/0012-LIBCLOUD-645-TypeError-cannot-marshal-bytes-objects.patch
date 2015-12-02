@@ -1,0 +1,69 @@
+From: Arfrever Frehtes Taifersar Arahesis <arfrever@gentoo.org>
+Date: Thu, 3 Dec 2015 11:20:33 +0100
+Subject: LIBCLOUD-645: TypeError: cannot marshal bytes objects
+
+libcloud.test.compute.test_softlayer.SoftLayerTests.test_create_key_pair()
+fails with Python 3.2.
+This problem does not occur with Python 2.* or >=3.3.
+
+======================================================================
+ERROR: test_create_key_pair (libcloud.test.compute.test_softlayer.SoftLayerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.2/xmlrpc/client.py", line 503, in __dump
+    f = self.dispatch[type(value)]
+KeyError: <class 'bytes'>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/UCS-4.1/libcloud-0.19.0/libcloud/test/compute/test_softlayer.py", line 164, in test_create_key_pair
+    key_pair = self.driver.create_key_pair(name='my-key-pair')
+  File "/root/UCS-4.1/libcloud-0.19.0/libcloud/compute/drivers/softlayer.py", line 397, in create_key_pair
+    'SoftLayer_Security_Ssh_Key', 'createObject', new_key
+  File "/root/UCS-4.1/libcloud-0.19.0/libcloud/common/softlayer.py", line 64, in request
+    endpoint})
+  File "/root/UCS-4.1/libcloud-0.19.0/libcloud/common/xmlrpc.py", line 105, in request
+    data = xmlrpclib.dumps(args, methodname=method_name, allow_none=True)
+  File "/usr/lib/python3.2/xmlrpc/client.py", line 937, in dumps
+    data = m.dumps(params)
+  File "/usr/lib/python3.2/xmlrpc/client.py", line 495, in dumps
+    dump(v, write)
+  File "/usr/lib/python3.2/xmlrpc/client.py", line 517, in __dump
+    f(self, value, write)
+  File "/usr/lib/python3.2/xmlrpc/client.py", line 586, in dump_struct
+    dump(v, write)
+  File "/usr/lib/python3.2/xmlrpc/client.py", line 507, in __dump
+    raise TypeError("cannot marshal %s objects" % type(value))
+TypeError: cannot marshal <class 'bytes'> objects
+
+<https://issues.apache.org/jira/browse/LIBCLOUD-645>
+---
+ libcloud/compute/drivers/softlayer.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/libcloud/compute/drivers/softlayer.py b/libcloud/compute/drivers/softlayer.py
+index 5243d0b..83c3207 100644
+--- a/libcloud/compute/drivers/softlayer.py
++++ b/libcloud/compute/drivers/softlayer.py
+@@ -28,6 +28,7 @@ from libcloud.compute.types import Provider, NodeState
+ from libcloud.compute.base import NodeDriver, Node, NodeLocation, NodeSize, \
+     NodeImage, KeyPair
+ from libcloud.compute.types import KeyPairDoesNotExistError
++from libcloud.utils.py3 import PY3
+ 
+ DEFAULT_DOMAIN = 'example.com'
+ DEFAULT_CPU_SIZE = 1
+@@ -388,8 +389,11 @@ class SoftLayerNodeDriver(NodeDriver):
+             raise NotImplementedError('create_key_pair needs'
+                                       'the pycrypto library')
+         key = RSA.generate(ex_size)
++        public_exported_key = key.publickey().exportKey('OpenSSH')
++        if PY3:
++            public_exported_key = public_exported_key.decode("utf-8")
+         new_key = {
+-            'key': key.publickey().exportKey('OpenSSH'),
++            'key': public_exported_key,
+             'label': name,
+             'notes': '',
+         }

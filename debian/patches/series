@@ -1,0 +1,12 @@
+0001-OpenStack-use-NodeState.SUSPENDED.patch
+0002-OpenStack-use-NodeState.PAUSED.patch
+0003-compute-Remove-duplicate-state-STOPPED.patch
+0004-EC2-Specify-RAM-size-in-GiB.patch
+0005-EC2-Fix-disk-size.patch
+0006-EC2-Add-missing-vCPU-information.patch
+0007-EC2-Add-g2.8xlarge-and-t2.large.patch
+0008-EC2-Rename-i2-and-d2-instance-types.patch
+0009-EC2-Move-comment-before-t2-instances.patch
+0010-EC2-Add-clarifications.patch
+0011-EC2-Update-pricing.patch
+0012-LIBCLOUD-645-TypeError-cannot-marshal-bytes-objects.patch

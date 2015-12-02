@@ -1,0 +1,31 @@
+From: Philipp Hahn <hahn@univention.de>
+Date: Tue, 1 Dec 2015 09:05:37 +0100
+Subject: EC2: Add clarifications
+
+Add source URLs.
+Add unit type for RAM and disk size.
+---
+ libcloud/compute/drivers/ec2.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/libcloud/compute/drivers/ec2.py b/libcloud/compute/drivers/ec2.py
+index 8ac5f46..4c871ac 100644
+--- a/libcloud/compute/drivers/ec2.py
++++ b/libcloud/compute/drivers/ec2.py
+@@ -89,6 +89,8 @@ EUCA_NAMESPACE = 'http://msgs.eucalyptus.com/%s' % (DEFAULT_EUCA_API_VERSION)
+ """
+ Sizes must be hardcoded, because Amazon doesn't provide an API to fetch them.
+ From http://aws.amazon.com/ec2/instance-types/
++and <http://aws.amazon.com/ec2/previous-generation/>
++ram = [MiB], disk = [GB]
+ """
+ 
+ 
+@@ -631,6 +633,7 @@ INSTANCE_TYPES = {
+     }
+ }
+ 
++#  From <https://aws.amazon.com/marketplace/help/200777880>
+ REGION_DETAILS = {
+     # US East (Northern Virginia) Region
+     'us-east-1': {

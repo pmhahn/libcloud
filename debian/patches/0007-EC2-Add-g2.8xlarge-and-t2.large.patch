@@ -1,0 +1,389 @@
+From: Philipp Hahn <hahn@univention.de>
+Date: Tue, 1 Dec 2015 09:01:10 +0100
+Subject: EC2: Add g2.8xlarge and t2.large
+
+>From <https://aws.amazon.com/ec2/instance-types/?nc1=f_ls>
+
+Conflicts:
+	libcloud/test/compute/test_ec2.py
+---
+ libcloud/compute/drivers/ec2.py   | 56 ++++++++++++++++++++++++++++++++-------
+ libcloud/data/pricing.json        | 35 +++++++++++++++++-------
+ libcloud/test/compute/test_ec2.py | 12 ++++-----
+ 3 files changed, 78 insertions(+), 25 deletions(-)
+
+diff --git a/libcloud/compute/drivers/ec2.py b/libcloud/compute/drivers/ec2.py
+index f70732c..d0352d5 100644
+--- a/libcloud/compute/drivers/ec2.py
++++ b/libcloud/compute/drivers/ec2.py
+@@ -298,6 +298,16 @@ INSTANCE_TYPES = {
+             'cpu': 8
+         }
+     },
++    'g2.8xlarge': {
++        'id': 'g2.8xlarge',
++        'name': 'Cluster GPU G2 Eight Extra Large Instance',
++        'ram': GiB(60),
++        'disk': 2 * 120,  # GB
++        'bandwidth': None,
++        'extra': {
++            'cpu': 32
++        }
++    },
+     'cc1.4xlarge': {
+         'id': 'cc1.4xlarge',
+         'name': 'Cluster Compute Quadruple Extra Large Instance',
+@@ -608,6 +618,16 @@ INSTANCE_TYPES = {
+         'extra': {
+             'cpu': 2
+         }
++    },
++    't2.large': {
++        'id': 't2.large',
++        'name': 'Burstable Performance Medium Instance',
++        'ram': GiB(8),
++        'disk': 0,  # EBS Only
++        'bandwidth': None,
++        'extra': {
++            'cpu': 2
++        }
+     }
+ }
+ 
+@@ -641,6 +661,7 @@ REGION_DETAILS = {
+             'c3.8xlarge',
+             'cg1.4xlarge',
+             'g2.2xlarge',
++            'g2.8xlarge',
+             'cr1.8xlarge',
+             'hs1.8xlarge',
+             'i2.xlarge',
+@@ -658,7 +679,8 @@ REGION_DETAILS = {
+             'r3.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     # US West (Northern California) Region
+@@ -683,6 +705,7 @@ REGION_DETAILS = {
+             'c1.medium',
+             'c1.xlarge',
+             'g2.2xlarge',
++            'g2.8xlarge',
+             'c3.large',
+             'c3.xlarge',
+             'c3.2xlarge',
+@@ -699,7 +722,8 @@ REGION_DETAILS = {
+             'r3.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     # US West (Oregon) Region
+@@ -724,6 +748,7 @@ REGION_DETAILS = {
+             'c1.medium',
+             'c1.xlarge',
+             'g2.2xlarge',
++            'g2.8xlarge',
+             'c3.large',
+             'c3.xlarge',
+             'c3.2xlarge',
+@@ -746,7 +771,8 @@ REGION_DETAILS = {
+             'r3.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     # EU (Ireland) Region
+@@ -771,6 +797,7 @@ REGION_DETAILS = {
+             'c1.medium',
+             'c1.xlarge',
+             'g2.2xlarge',
++            'g2.8xlarge',
+             'c3.large',
+             'c3.xlarge',
+             'c3.2xlarge',
+@@ -793,7 +820,8 @@ REGION_DETAILS = {
+             'r3.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     # EU (Frankfurt) Region
+@@ -827,7 +855,8 @@ REGION_DETAILS = {
+             'r3.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     # Asia Pacific (Singapore) Region
+@@ -867,7 +896,8 @@ REGION_DETAILS = {
+             'd2.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     # Asia Pacific (Tokyo) Region
+@@ -891,6 +921,7 @@ REGION_DETAILS = {
+             'm3.2xlarge',
+             'c1.medium',
+             'g2.2xlarge',
++            'g2.8xlarge',
+             'c1.xlarge',
+             'c3.large',
+             'c3.xlarge',
+@@ -913,7 +944,8 @@ REGION_DETAILS = {
+             'r3.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     # South America (Sao Paulo) Region
+@@ -939,7 +971,8 @@ REGION_DETAILS = {
+             'c1.xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     # Asia Pacific (Sydney) Region
+@@ -984,7 +1017,8 @@ REGION_DETAILS = {
+             'r3.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     'us-gov-west-1': {
+@@ -1008,6 +1042,7 @@ REGION_DETAILS = {
+             'c1.medium',
+             'c1.xlarge',
+             'g2.2xlarge',
++            'g2.8xlarge',
+             'c3.large',
+             'c3.xlarge',
+             'c3.2xlarge',
+@@ -1026,7 +1061,8 @@ REGION_DETAILS = {
+             'r3.8xlarge',
+             't2.micro',
+             't2.small',
+-            't2.medium'
++            't2.medium',
++            't2.large'
+         ]
+     },
+     'nimbus': {
+diff --git a/libcloud/data/pricing.json b/libcloud/data/pricing.json
+index ab85715..d78fcc3 100644
+--- a/libcloud/data/pricing.json
++++ b/libcloud/data/pricing.json
+@@ -55,6 +55,7 @@
+             "d2.8xlarge": "6.752",
+             "d2.xlarge": "0.844",
+             "g2.2xlarge": "0.898",
++            "g2.8xlarge": "3.592",
+             "hi1.4xlarge": "3.276",
+             "hs1.8xlarge": "5.400",
+             "i2.2xlarge": "2.001",
+@@ -80,7 +81,8 @@
+             "t1.micro": "0.026",
+             "t2.medium": "0.080",
+             "t2.micro": "0.020",
+-            "t2.small": "0.040"
++            "t2.small": "0.040",
++            "t2.large": "0.16"
+         },
+         "ec2_ap_southeast": {
+             "c1.medium": "0.164",
+@@ -99,6 +101,7 @@
+             "d2.4xlarge": "3.480",
+             "d2.8xlarge": "6.960",
+             "d2.xlarge": "0.870",
++            "g2.8xlarge": "4",
+             "g2.2xlarge": "1.000",
+             "hi1.4xlarge": "N/A",
+             "hs1.8xlarge": "5.570",
+@@ -125,7 +128,8 @@
+             "t1.micro": "0.020",
+             "t2.medium": "0.080",
+             "t2.micro": "0.020",
+-            "t2.small": "0.040"
++            "t2.small": "0.040",
++            "t2.large": "0.16"
+         },
+         "ec2_ap_southeast_2": {
+             "c1.medium": "0.164",
+@@ -145,6 +149,7 @@
+             "d2.8xlarge": "6.960",
+             "d2.xlarge": "0.870",
+             "g2.2xlarge": "0.898",
++            "g2.8xlarge": "3.592",
+             "hi1.4xlarge": "N/A",
+             "hs1.8xlarge": "5.570",
+             "i2.2xlarge": "2.035",
+@@ -170,7 +175,8 @@
+             "t1.micro": "0.020",
+             "t2.medium": "0.080",
+             "t2.micro": "0.020",
+-            "t2.small": "0.040"
++            "t2.small": "0.040",
++            "t2.large": "0.16"
+         },
+         "ec2_eu_central": {
+             "c3.2xlarge": "0.516",
+@@ -188,6 +194,7 @@
+             "d2.8xlarge": "6.352",
+             "d2.xlarge": "0.794",
+             "g2.2xlarge": null,
++            "g2.8xlarge": "3.088",
+             "i2.2xlarge": "2.026",
+             "i2.4xlarge": "4.051",
+             "i2.8xlarge": "8.102",
+@@ -203,7 +210,8 @@
+             "r3.xlarge": "0.421",
+             "t2.medium": "0.060",
+             "t2.micro": "0.015",
+-            "t2.small": "0.030"
++            "t2.small": "0.030",
++            "t2.large": "0.12"
+         },
+         "ec2_eu_west": {
+             "c1.medium": "0.148",
+@@ -226,6 +234,7 @@
+             "d2.8xlarge": "5.880",
+             "d2.xlarge": "0.735",
+             "g2.2xlarge": "0.702",
++            "g2.8xlarge": "2.808",
+             "hi1.4xlarge": "3.100",
+             "hs1.8xlarge": "4.900",
+             "i2.2xlarge": "1.876",
+@@ -251,7 +260,8 @@
+             "t1.micro": "0.020",
+             "t2.medium": "0.056",
+             "t2.micro": "0.014",
+-            "t2.small": "0.028"
++            "t2.small": "0.028",
++            "t2.large": "0.112"
+         },
+         "ec2_sa_east": {
+             "c1.medium": "0.179",
+@@ -277,7 +287,8 @@
+             "t1.micro": "0.027",
+             "t2.medium": "0.108",
+             "t2.micro": "0.027",
+-            "t2.small": "0.054"
++            "t2.small": "0.054",
++            "t2.large": "0.216"
+         },
+         "ec2_us_east": {
+             "c1.medium": "0.130",
+@@ -300,6 +311,7 @@
+             "d2.8xlarge": "5.520",
+             "d2.xlarge": "0.690",
+             "g2.2xlarge": "0.650",
++            "g2.8xlarge": "2.6",
+             "hi1.4xlarge": "3.100",
+             "hs1.8xlarge": "4.600",
+             "i2.2xlarge": "1.705",
+@@ -361,7 +373,8 @@
+             "t1.micro": "0.024",
+             "t2.medium": "0.062",
+             "t2.micro": "0.015",
+-            "t2.small": "0.031"
++            "t2.small": "0.031",
++            "t2.large": "0.124"
+         },
+         "ec2_us_west": {
+             "c1.medium": "0.148",
+@@ -377,6 +390,7 @@
+             "c4.large": "0.138",
+             "c4.xlarge": "0.276",
+             "g2.2xlarge": "0.702",
++            "g2.8xlarge": "2.808",
+             "hi1.4xlarge": "N/A",
+             "hs1.8xlarge": "N/A",
+             "i2.2xlarge": "1.876",
+@@ -402,7 +416,8 @@
+             "t1.micro": "0.025",
+             "t2.medium": "0.068",
+             "t2.micro": "0.017",
+-            "t2.small": "0.034"
++            "t2.small": "0.034",
++            "t2.large": "0.136"
+         },
+         "ec2_us_west_oregon": {
+             "c1.medium": "0.130",
+@@ -424,6 +439,7 @@
+             "d2.8xlarge": "5.520",
+             "d2.xlarge": "0.690",
+             "g2.2xlarge": "0.650",
++            "g2.8xlarge": "2.6",
+             "hi1.4xlarge": "3.100",
+             "hs1.8xlarge": "4.600",
+             "i2.2xlarge": "1.705",
+@@ -449,7 +465,8 @@
+             "t1.micro": "0.020",
+             "t2.medium": "0.052",
+             "t2.micro": "0.013",
+-            "t2.small": "0.026"
++            "t2.small": "0.026",
++            "t2.large": "0.104"
+         },
+         "elastichosts": {
+             "extra-large": 0.579,
+diff --git a/libcloud/test/compute/test_ec2.py b/libcloud/test/compute/test_ec2.py
+index 3f74cec..e6ec544 100644
+--- a/libcloud/test/compute/test_ec2.py
++++ b/libcloud/test/compute/test_ec2.py
+@@ -414,20 +414,20 @@ class EC2Tests(LibcloudTestCase, TestCaseMixin):
+             self.assertTrue('m2.4xlarge' in ids)
+ 
+             if region_name == 'us-east-1':
+-                self.assertEqual(len(sizes), 40)
++                self.assertEqual(len(sizes), 42)
+                 self.assertTrue('cg1.4xlarge' in ids)
+                 self.assertTrue('cc2.8xlarge' in ids)
+                 self.assertTrue('cr1.8xlarge' in ids)
+             elif region_name == 'us-west-1':
+-                self.assertEqual(len(sizes), 32)
++                self.assertEqual(len(sizes), 34)
+             if region_name == 'us-west-2':
+-                self.assertEqual(len(sizes), 29)
+-            elif region_name == 'ap-southeast-1':
+                 self.assertEqual(len(sizes), 31)
++            elif region_name == 'ap-southeast-1':
++                self.assertEqual(len(sizes), 32)
+             elif region_name == 'ap-southeast-2':
+-                self.assertEqual(len(sizes), 36)
++                self.assertEqual(len(sizes), 37)
+             elif region_name == 'eu-west-1':
+-                self.assertEqual(len(sizes), 38)
++                self.assertEqual(len(sizes), 40)
+ 
+         self.driver.region_name = region_old
+ 

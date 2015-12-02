@@ -1,0 +1,22 @@
+From: Philipp Hahn <hahn@univention.de>
+Date: Wed, 2 Dec 2015 16:49:37 +0100
+Subject: OpenStack: use NodeState.SUSPENDED
+
+Since commit b09c1bef there is NodeState.SUSPENDED; use it
+---
+ libcloud/compute/drivers/openstack.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libcloud/compute/drivers/openstack.py b/libcloud/compute/drivers/openstack.py
+index 4205d60..607b108 100644
+--- a/libcloud/compute/drivers/openstack.py
++++ b/libcloud/compute/drivers/openstack.py
+@@ -87,7 +87,7 @@ class OpenStackNodeDriver(NodeDriver, OpenStackDriverMixin):
+         'BUILD': NodeState.PENDING,
+         'REBUILD': NodeState.PENDING,
+         'ACTIVE': NodeState.RUNNING,
+-        'SUSPENDED': NodeState.STOPPED,
++        'SUSPENDED': NodeState.SUSPENDED,
+         'SHUTOFF': NodeState.STOPPED,
+         'DELETED': NodeState.TERMINATED,
+         'QUEUE_RESIZE': NodeState.PENDING,

@@ -1,0 +1,22 @@
+From: Philipp Hahn <hahn@univention.de>
+Date: Wed, 2 Dec 2015 14:30:07 +0100
+Subject: compute: Remove duplicate state STOPPED
+
+Remove duplicate description for NodeState.STOPPED added by
+commit b09c1bef78e13688e3c5739e5fd620e226a16672
+---
+ libcloud/compute/types.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/libcloud/compute/types.py b/libcloud/compute/types.py
+index ddb9365..853f30e 100644
+--- a/libcloud/compute/types.py
++++ b/libcloud/compute/types.py
+@@ -200,7 +200,6 @@ class NodeState(object):
+     :cvar TERMINATED: Node is terminated. This node can't be started later on.
+     :cvar STOPPED: Node is stopped. This node can be started later on.
+     :cvar PENDING: Node is pending.
+-    :cvar STOPPED: Node is stopped.
+     :cvar SUSPENDED: Node is suspended.
+     :cvar ERROR: Node is an error state. Usually no operations can be performed
+                  on the node once it ends up in the error state.

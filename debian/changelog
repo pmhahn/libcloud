@@ -1,9 +1,23 @@
-libcloud (0.19.0-0.1) unstable; urgency=medium
+libcloud (0.19.0-0.2) unstable; urgency=medium
 
   * Non-maintainer upload.
   * New upstream release.
     - Obsolete debian/patches/dont_req_backports_with_py3.patch
   * debian/copyright: 2015
+  * debian/control: Adjust build dependencies
+  * OpenStack: use NodeState.SUSPENDED
+  * OpenStack: use NodeState.PAUSED
+  * compute: Remove duplicate state STOPPED
+  * EC2: Specify RAM size in GiB
+  * EC2: Fix disk size
+  * EC2: Add missing vCPU information
+  * EC2: Add g2.8xlarge and t2.large
+  * EC2: Rename i2 and d2 instance types
+  * EC2: Move comment before t2 instances
+  * EC2: Add clarifications
+  * EC2: Sort pricing by (non-)numeric part
+  * EC2: Update pricing
+  * LIBCLOUD-645: TypeError: cannot marshal bytes objects
 
  -- Philipp Hahn <hahn@univention.de>  Mon, 30 Nov 2015 16:17:22 +0100
 

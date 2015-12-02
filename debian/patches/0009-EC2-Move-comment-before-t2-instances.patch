@@ -1,0 +1,30 @@
+From: Philipp Hahn <hahn@univention.de>
+Date: Tue, 1 Dec 2015 09:05:02 +0100
+Subject: EC2: Move comment before t2 instances
+
+t2.micro is also a "Burstable Performance General Purpose" instance
+type.
+---
+ libcloud/compute/drivers/ec2.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libcloud/compute/drivers/ec2.py b/libcloud/compute/drivers/ec2.py
+index 8896ef7..8ac5f46 100644
+--- a/libcloud/compute/drivers/ec2.py
++++ b/libcloud/compute/drivers/ec2.py
+@@ -588,6 +588,7 @@ INSTANCE_TYPES = {
+             'cpu': 32
+         }
+     },
++    # Burstable Performance General Purpose
+     't2.micro': {
+         'id': 't2.micro',
+         'name': 'Burstable Performance Micro Instance',
+@@ -598,7 +599,6 @@ INSTANCE_TYPES = {
+             'cpu': 1
+         }
+     },
+-    # Burstable Performance General Purpose
+     't2.small': {
+         'id': 't2.small',
+         'name': 'Burstable Performance Small Instance',
