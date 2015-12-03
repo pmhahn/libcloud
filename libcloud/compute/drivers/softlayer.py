@@ -28,6 +28,7 @@ from libcloud.compute.types import Provider, NodeState
 from libcloud.compute.base import NodeDriver, Node, NodeLocation, NodeSize, \
     NodeImage, KeyPair
 from libcloud.compute.types import KeyPairDoesNotExistError
+from libcloud.utils.py3 import PY3
 
 DEFAULT_DOMAIN = 'example.com'
 DEFAULT_CPU_SIZE = 1
@@ -388,8 +389,11 @@ class SoftLayerNodeDriver(NodeDriver):
             raise NotImplementedError('create_key_pair needs'
                                       'the pycrypto library')
         key = RSA.generate(ex_size)
+        public_exported_key = key.publickey().exportKey('OpenSSH')
+        if PY3:
+            public_exported_key = public_exported_key.decode("utf-8")
         new_key = {
-            'key': key.publickey().exportKey('OpenSSH'),
+            'key': public_exported_key,
             'label': name,
             'notes': '',
         }
